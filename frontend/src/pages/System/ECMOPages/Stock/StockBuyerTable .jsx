@@ -9,9 +9,8 @@ import SystemFooter from "../../../../components/System/ECMO/Footer/SystemFooter
 import swal from "sweetalert";
 
 function StockBuyerTable() {
-
   const [id, setID] = useState("");
- 
+
   //get data from local storage as a string
   const ecoInfo = localStorage.getItem("ecmoInfo");
   //set data to local storage as a JSON object
@@ -22,7 +21,7 @@ function StockBuyerTable() {
   const [showSellStockModal, setShowSellStockModal] = useState(false);
   const [showUpdateSellStockModal, setShowUpdateSellStockModal] =
     useState(false);
- 
+
   const handleSellStockModalClose = () => setShowSellStockModal(false);
   const handleSellStockModalShow = () => setShowSellStockModal(true);
 
@@ -33,8 +32,6 @@ function StockBuyerTable() {
     setID(id);
   };
 
-
-
   const [stock, setStock] = useState([]);
 
   const [isStockUpdated, setIsStockUpdated] = useState(false);
@@ -44,7 +41,9 @@ function StockBuyerTable() {
     const getStocks = async () => {
       try {
         const res = await axios
-          .get("http://localhost:8075/stock/AllStocks")
+          .get(
+            "https://central-agroz-economic-system.onrender.com/stock/AllStocks"
+          )
           .then((res) => {
             const data = res.data;
             setStock(data);
@@ -60,33 +59,29 @@ function StockBuyerTable() {
 
   //Group Types according to category
   const groupTypesByCategory = (data) => {
-
     // Check if data is an array
     if (!Array.isArray(data)) {
       console.log("Data is not an array");
       return [];
     }
 
-     // Create an empty object to store the grouped types
+    // Create an empty object to store the grouped types
     const groups = {};
 
-     // Create an empty object to store the grouped types
+    // Create an empty object to store the grouped types
     data.forEach((type) => {
-
       // Check if the category exists
       const category = type?.Category;
 
       // Check if the category exists
       if (category) {
-
-         // If the category doesn't exist in the groups object, create an empty array for it
+        // If the category doesn't exist in the groups object, create an empty array for it
         if (!groups[category]) {
           groups[category] = [];
         }
 
         // Push the type into the corresponding category array
         groups[category].push(type);
-
       }
     });
 
@@ -97,7 +92,6 @@ function StockBuyerTable() {
     }));
   };
 
-  
   function DeleteStock(id) {
     swal({
       title: "Are you sure?",
@@ -108,7 +102,10 @@ function StockBuyerTable() {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/stock/delete/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/stock/delete/" +
+              id
+          )
           .then((res) => {
             setStock((stock) => stock.filter((_, i) => i !== id));
             setIsStockUpdated(true);

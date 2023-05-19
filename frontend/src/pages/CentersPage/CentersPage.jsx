@@ -25,10 +25,12 @@ const CentersPage = () => {
   const [centers, setCenters] = useState([]);
 
   const getAllCenters = () => {
-    axios.get("http://localhost:8075/ecocenters/").then((res) => {
-      // console.log(res.data);
-      setCenters(res.data);
-    });
+    axios
+      .get("https://central-agroz-economic-system.onrender.com/ecocenters/")
+      .then((res) => {
+        // console.log(res.data);
+        setCenters(res.data);
+      });
   };
 
   useEffect(() => {

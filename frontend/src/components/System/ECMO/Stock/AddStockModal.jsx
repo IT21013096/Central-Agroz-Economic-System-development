@@ -8,12 +8,12 @@ const AddStockModal = ({ show, handleClose, setIsStockUpdated }) => {
   const [category, setCategory] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [submitted, isSubmitted] = useState(false);
-      //get data from local storage as a string
-      const ecoInfo = localStorage.getItem("ecmoInfo");
-      //set data to local storage as a JSON object
-      const ecoInfo1 = JSON.parse(ecoInfo);
-    
-      const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
+  //get data from local storage as a string
+  const ecoInfo = localStorage.getItem("ecmoInfo");
+  //set data to local storage as a JSON object
+  const ecoInfo1 = JSON.parse(ecoInfo);
+
+  const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
 
   const formatDate = (date) => {
     const originalDate = date
@@ -32,7 +32,7 @@ const AddStockModal = ({ show, handleClose, setIsStockUpdated }) => {
   const getCategories = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8075/priceList/allPrices"
+        "https://central-agroz-economic-system.onrender.com/priceList/allPrices"
       );
       setCategories(data);
     } catch (err) {
@@ -159,17 +159,20 @@ const AddStockModal = ({ show, handleClose, setIsStockUpdated }) => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && submitted) {
       axios
-        .post("http://localhost:8075/stock/addStock", {
-          CenterName: inputs.CenterName,
-          SupplierName: inputs.SupplierName,
-          FarmerID: inputs.FarmerID,
-          MobileNo: inputs.MobileNo,
-          Address: inputs.Address,
-          NoOfItems: numItems,
-          Item: inputs.Item,
-          Role: inputs.Role,
-          Date: inputs.Date,
-        })
+        .post(
+          "https://central-agroz-economic-system.onrender.com/stock/addStock",
+          {
+            CenterName: inputs.CenterName,
+            SupplierName: inputs.SupplierName,
+            FarmerID: inputs.FarmerID,
+            MobileNo: inputs.MobileNo,
+            Address: inputs.Address,
+            NoOfItems: numItems,
+            Item: inputs.Item,
+            Role: inputs.Role,
+            Date: inputs.Date,
+          }
+        )
         .then((res) => {
           swal("Stock Bought Successfully");
           setIsStockUpdated(true);

@@ -34,7 +34,10 @@ const FarmerLogin = () => {
     // console.log(newOb);
 
     axios
-      .post("http://localhost:8075/farmerL/farmerlogin/", newOb)
+      .post(
+        "https://central-agroz-economic-system.onrender.com/farmerL/farmerlogin/",
+        newOb
+      )
       .then((res) => {
         // console.log(res.data);
         swal({

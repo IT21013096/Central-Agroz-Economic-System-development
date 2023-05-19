@@ -70,7 +70,10 @@ const AddEchoCenterAdmin = () => {
       };
 
       axios
-        .post("http://localhost:8075/ecocenters/register", echoCenterAdmin)
+        .post(
+          "https://central-agroz-economic-system.onrender.com/ecocenters/register",
+          echoCenterAdmin
+        )
         .then((res) => {
           // alert("Eco Center Admin Added");
           swal("Eco Center Admin Added", "", "success");

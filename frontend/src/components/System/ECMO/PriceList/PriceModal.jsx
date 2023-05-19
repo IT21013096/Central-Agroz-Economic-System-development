@@ -32,7 +32,9 @@ const PriceModal = ({ centerName }) => {
       setFormattedDate(formattedDate);
       console.log(formattedDate);
       const { data } = await axios
-        .get(`http://localhost:8075/priceList/allPrices`)
+        .get(
+          `https://central-agroz-economic-system.onrender.com/priceList/allPrices`
+        )
         .then((res) => {
           const data = res.data;
           console.log(data);

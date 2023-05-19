@@ -65,7 +65,10 @@ const FarmerPublishProducts = () => {
     // console.log(newOb);
 
     axios
-      .post("http://localhost:8075/farmerL/publishcrop", newOb)
+      .post(
+        "https://central-agroz-economic-system.onrender.com/farmerL/publishcrop",
+        newOb
+      )
       .then(
         (res) => {
           // console.log(res.data);

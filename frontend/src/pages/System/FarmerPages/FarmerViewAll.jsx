@@ -124,7 +124,7 @@ const FarmerViewAll = () => {
   const getAllCrops = () => {
     axios
       .get(
-        "http://localhost:8075/farmerL/getallcropsbyfarmerid/" +
+        "https://central-agroz-economic-system.onrender.com/farmerL/getallcropsbyfarmerid/" +
           userData.data._id
       )
       .then((res) => {
@@ -151,7 +151,10 @@ const FarmerViewAll = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/farmerL/deletecropbyid/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/farmerL/deletecropbyid/" +
+              id
+          )
           .then((res) => {
             swal("Poof! Your crop details has been deleted!", {
               icon: "success",

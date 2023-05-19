@@ -46,7 +46,7 @@ const QunatityModal = ({ centerName }) => {
     console.log(formattedDate);
     const fetchStocks = async () => {
       const response = await axios.get(
-        "http://localhost:8075/stock/AllStocks/" +
+        "https://central-agroz-economic-system.onrender.com/stock/AllStocks/" +
           centerName +
           "/" +
           formattedDate

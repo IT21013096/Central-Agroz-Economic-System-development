@@ -1,17 +1,17 @@
-import React from 'react';
-import { tableCustomStyles } from '../Global/TableStyles/tableRecordStyles.jsx';
-import DataTable from 'react-data-table-component';
-import axios from 'axios';
+import React from "react";
+import { tableCustomStyles } from "../Global/TableStyles/tableRecordStyles.jsx";
+import DataTable from "react-data-table-component";
+import axios from "axios";
 
 const HarvestRecords = () => {
-  const ao = JSON.parse(localStorage.getItem('agriofficer'));
-  const aoId = ao['agriculturalOfficer']['id'];
+  const ao = JSON.parse(localStorage.getItem("agriofficer"));
+  const aoId = ao["agriculturalOfficer"]["id"];
 
   const [harvest, setHarvest] = React.useState([]);
 
   const getAllHarvest = () => {
     axios
-      .get('http://localhost:8075/ao/getharvests')
+      .get("https://central-agroz-economic-system.onrender.com/ao/getharvests")
       .then((res) => {
         const filteredHarvest = res.data.filter((harvest) => {
           return harvest.aoId === aoId;
@@ -34,47 +34,47 @@ const HarvestRecords = () => {
 
   const columns = [
     {
-      name: '#',
+      name: "#",
       selector: (row) => row.id,
       sortable: true,
-      width: '50px',
+      width: "50px",
     },
     {
-      name: 'Name',
+      name: "Name",
       selector: (row) => row.farmerUsername,
       sortable: true,
     },
     {
-      name: 'Crop Type',
+      name: "Crop Type",
       selector: (row) => row.cropType,
       sortable: true,
-      width: '150px',
+      width: "150px",
     },
     {
-      name: 'Season',
+      name: "Season",
       selector: (row) => row.season,
       sortable: true,
-      width: '100px',
+      width: "100px",
     },
     {
-      name: 'Year',
+      name: "Year",
       selector: (row) => row.year,
       sortable: true,
-      width: '120px',
+      width: "120px",
     },
     {
-      name: 'Month',
+      name: "Month",
       selector: (row) => row.month,
       sortable: true,
-      width: '120px',
+      width: "120px",
     },
     {
-      name: 'Expected Harvest(kg)',
+      name: "Expected Harvest(kg)",
       selector: (row) => row.expectedHarvest,
       sortable: true,
     },
     {
-      name: 'Actual Harvest(kg)',
+      name: "Actual Harvest(kg)",
       selector: (row) => row.actualHarvest,
       sortable: true,
     },
@@ -89,7 +89,7 @@ const HarvestRecords = () => {
         pagination={true}
         paginationPerPage={5}
         paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
-        noDataComponent='No Products Found'
+        noDataComponent="No Products Found"
       />
     </div>
   );

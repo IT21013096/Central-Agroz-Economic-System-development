@@ -28,7 +28,10 @@ const AdminLogin = () => {
     // console.log(newOb);
 
     axios
-      .post("http://localhost:8075/admin/login", newOb)
+      .post(
+        "https://central-agroz-economic-system.onrender.com/admin/login",
+        newOb
+      )
       .then((res) => {
         // console.log(res.data);
         swal({

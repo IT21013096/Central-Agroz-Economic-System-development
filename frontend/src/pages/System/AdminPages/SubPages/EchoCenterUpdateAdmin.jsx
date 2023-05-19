@@ -42,7 +42,9 @@ const EchoCenterUpdateAdmin = () => {
   const getEchoCenterDetails = async () => {
     try {
       axios
-        .get(`http://localhost:8075/ecocenters/${id}`)
+        .get(
+          `https://central-agroz-economic-system.onrender.com/ecocenters/${id}`
+        )
         .then((res) => {
           setEcoCenterName(res.data.ecoCenterName);
           setEcoCenterAddress(res.data.ecoCenterAddress);
@@ -91,7 +93,10 @@ const EchoCenterUpdateAdmin = () => {
         };
 
         axios
-          .put(`http://localhost:8075/ecocenters/update`, echoCenter)
+          .put(
+            `https://central-agroz-economic-system.onrender.com/ecocenters/update`,
+            echoCenter
+          )
           .then((res) => {
             // alert(res.data.message);
             swal("Success!", "Informations updated", "success").then(() => {

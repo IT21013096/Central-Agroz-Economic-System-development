@@ -31,7 +31,7 @@ const EchoCentersAdmin = () => {
   const getEchoCenters = async () => {
     try {
       axios
-        .get("http://localhost:8075/ecocenters/")
+        .get("https://central-agroz-economic-system.onrender.com/ecocenters/")
         .then((res) => {
           setEchoCenters(res.data);
           setFilteredData(res.data);
@@ -82,7 +82,10 @@ const EchoCentersAdmin = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/ecocenters/delete/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/ecocenters/delete/" +
+              id
+          )
           .then((res) => {
             swal("Poof! Your echo center has been deleted!", {
               icon: "success",

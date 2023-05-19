@@ -24,10 +24,12 @@ const AgriOfficerAdmin = () => {
 
   //get all agri officers
   const getAgriOfficers = async () => {
-    axios.get("http://localhost:8075/agriofficers/").then((res) => {
-      setAgriofficers(res.data);
-      setFilteredData(res.data);
-    });
+    axios
+      .get("https://central-agroz-economic-system.onrender.com/agriofficers/")
+      .then((res) => {
+        setAgriofficers(res.data);
+        setFilteredData(res.data);
+      });
   };
 
   useEffect(() => {
@@ -73,7 +75,10 @@ const AgriOfficerAdmin = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/agriofficers/delete/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/agriofficers/delete/" +
+              id
+          )
           .then((res) => {
             swal("Poof! Agri Officer has been deleted!", {
               icon: "success",

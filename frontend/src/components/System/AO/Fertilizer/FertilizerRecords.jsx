@@ -1,18 +1,20 @@
-import React from 'react';
-import { tableCustomStyles } from '../Global/TableStyles/tableRecordStyles.jsx';
-import DataTable from 'react-data-table-component';
-import FertilizerData from './FertilizerData.json';
-import axios from 'axios';
+import React from "react";
+import { tableCustomStyles } from "../Global/TableStyles/tableRecordStyles.jsx";
+import DataTable from "react-data-table-component";
+import FertilizerData from "./FertilizerData.json";
+import axios from "axios";
 
 const FertilizerRecords = () => {
-  const ao = JSON.parse(localStorage.getItem('agriofficer'));
-  const aoId = ao['agriculturalOfficer']['id'];
+  const ao = JSON.parse(localStorage.getItem("agriofficer"));
+  const aoId = ao["agriculturalOfficer"]["id"];
 
   const [fertilizerData, setFertilizerData] = React.useState([]);
 
   const getAllFertilizer = () => {
     axios
-      .get('http://localhost:8075/ao/getfertilizers')
+      .get(
+        "https://central-agroz-economic-system.onrender.com/ao/getfertilizers"
+      )
       .then((res) => {
         const filteredFertilizer = res.data.filter((fertilizer) => {
           return fertilizer.aoId === aoId;
@@ -35,33 +37,33 @@ const FertilizerRecords = () => {
 
   const columns = [
     {
-      name: '#',
+      name: "#",
       selector: (row) => row.id,
       sortable: true,
-      width: '50px',
+      width: "50px",
     },
     {
-      name: 'Name',
+      name: "Name",
       selector: (row) => row.farmerUsername,
       sortable: true,
     },
     {
-      name: 'Fertilizer Type',
+      name: "Fertilizer Type",
       selector: (row) => row.fertilizerType,
       sortable: true,
     },
     {
-      name: 'Year',
+      name: "Year",
       selector: (row) => row.year,
       sortable: true,
     },
     {
-      name: 'Month',
+      name: "Month",
       selector: (row) => row.month,
       sortable: true,
     },
     {
-      name: 'Quantity(kg)',
+      name: "Quantity(kg)",
       selector: (row) => row.quantity,
       sortable: true,
     },
@@ -76,7 +78,7 @@ const FertilizerRecords = () => {
         pagination={true}
         paginationPerPage={5}
         paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
-        noDataComponent='No Products Found'
+        noDataComponent="No Products Found"
       />
     </div>
   );

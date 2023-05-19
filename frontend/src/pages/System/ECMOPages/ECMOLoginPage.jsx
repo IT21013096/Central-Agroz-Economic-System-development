@@ -28,10 +28,13 @@ const ECMOLoginPage = () => {
   const history = useNavigate();
   const sendRequest = async () => {
     await axios
-      .post("http://localhost:8075/ecocenters/login", {
-        officerEmail: inputs.officerEmail,
-        password: inputs.password,
-      })
+      .post(
+        "https://central-agroz-economic-system.onrender.com/ecocenters/login",
+        {
+          officerEmail: inputs.officerEmail,
+          password: inputs.password,
+        }
+      )
       .then((res) => {
         swal("You have successfully Logged.");
 

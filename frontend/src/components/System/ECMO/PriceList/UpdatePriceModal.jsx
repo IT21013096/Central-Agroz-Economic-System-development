@@ -56,7 +56,10 @@ const UpdatePriceModal = ({ show, handleClose, id, setIsPriceUpdated }) => {
   const getData = async () => {
     try {
       await axios
-        .get("http://localhost:8075/priceList/price/" + id)
+        .get(
+          "https://central-agroz-economic-system.onrender.com/priceList/price/" +
+            id
+        )
         .then((res) => {
           const data = res.data;
           setPrice(data);
@@ -76,12 +79,16 @@ const UpdatePriceModal = ({ show, handleClose, id, setIsPriceUpdated }) => {
   const sendData = async (e) => {
     e.preventDefault();
     await axios
-      .put("http://localhost:8075/priceList/update/" + id, {
-        Category: price.Category,
-        Type: price.Type,
-        Image: price.Image,
-        Price: newPrice,
-      })
+      .put(
+        "https://central-agroz-economic-system.onrender.com/priceList/update/" +
+          id,
+        {
+          Category: price.Category,
+          Type: price.Type,
+          Image: price.Image,
+          Price: newPrice,
+        }
+      )
       .then(() => {
         swal("You have successfully updated.");
         setIsPriceUpdated(true);

@@ -89,7 +89,10 @@ const AddAgriOfficerAdmin = () => {
       };
 
       axios
-        .post("http://localhost:8075/agriofficers/register", data)
+        .post(
+          "https://central-agroz-economic-system.onrender.com/agriofficers/register",
+          data
+        )
         .then((res) => {
           // console.log(res);
           swal({

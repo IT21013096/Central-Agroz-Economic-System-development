@@ -4,12 +4,12 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
-      //get data from local storage as a string
-      const ecoInfo = localStorage.getItem("ecmoInfo");
-      //set data to local storage as a JSON object
-      const ecoInfo1 = JSON.parse(ecoInfo);
-    
-      const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
+  //get data from local storage as a string
+  const ecoInfo = localStorage.getItem("ecmoInfo");
+  //set data to local storage as a JSON object
+  const ecoInfo1 = JSON.parse(ecoInfo);
+
+  const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [formErrors, setFormErrors] = useState({});
   const [category, setCategory] = useState("");
@@ -38,7 +38,10 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
     console.log(formattedDate);
     const fetchStocks = async () => {
       const response = await axios.get(
-        "http://localhost:8075/stock/AllStocks/"+centerName + '/' + formattedDate
+        "https://central-agroz-economic-system.onrender.com/stock/AllStocks/" +
+          centerName +
+          "/" +
+          formattedDate
       );
       setStock(response.data.result);
     };
@@ -46,11 +49,8 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
     fetchStocks();
   }, [selectedDate]);
 
-
-
   useEffect(() => {
     const calculateReportData = () => {
-
       // Check if stock is an array
       if (!Array.isArray(stock)) {
         console.log("Stock is not an array");
@@ -59,19 +59,16 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
 
       //Calculate the qunatities by iterating over each stock item and its Item array.
       const report = stock.reduce((acc, stock) => {
-
-       // Extract the necessary properties from each stock.
+        // Extract the necessary properties from each stock.
         const { Role, Item } = stock;
 
-       
         Item.forEach((item) => {
-
           // Extract the necessary properties from each Item.
           const { Category, Type, Quantity } = item;
-           //Create a unique key based on the Category and Type.
+          //Create a unique key based on the Category and Type.
           const key = `${Category}-${Type}`;
 
-         // Create a unique key based on the Category and Type.
+          // Create a unique key based on the Category and Type.
           if (!acc[key]) {
             acc[key] = { boughtQuantity: 0, soldQuantity: 0 };
           }
@@ -94,10 +91,8 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
     calculateReportData();
   }, [stock]);
 
-
   //group types by category
   const groupTypesByCategory = (data) => {
-
     //check is array
     if (!Array.isArray(data)) {
       console.log("Data is not an array");
@@ -109,11 +104,9 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
         const { Category, Type } = item;
 
         if (Category) {
-
           /// Initialize the category array if it doesn't exist
           groups[Category] = groups[Category] || [];
           if (!groups[Category].includes(Type)) {
-
             // Add the type to the category array if it's not already included
             groups[Category].push(Type);
           }
@@ -167,16 +160,19 @@ const SellStockModal = ({ show, handleClose, setIsStockUpdated }) => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && submitted) {
       axios
-        .post("http://localhost:8075/stock/addStock", {
-          CenterName: inputs.CenterName,
-          SupplierName: inputs.SupplierName,
-          MobileNo: inputs.MobileNo,
-          Address: inputs.Address,
-          NoOfItems: numItems,
-          Item: inputs.Item,
-          Role: inputs.Role,
-          Date: inputs.Date,
-        })
+        .post(
+          "https://central-agroz-economic-system.onrender.com/stock/addStock",
+          {
+            CenterName: inputs.CenterName,
+            SupplierName: inputs.SupplierName,
+            MobileNo: inputs.MobileNo,
+            Address: inputs.Address,
+            NoOfItems: numItems,
+            Item: inputs.Item,
+            Role: inputs.Role,
+            Date: inputs.Date,
+          }
+        )
         .then((res) => {
           swal("Stock Bought Successfully");
           setIsStockUpdated(true);

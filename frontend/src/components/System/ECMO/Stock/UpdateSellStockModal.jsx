@@ -28,7 +28,7 @@ const UpdateSellStockModal = ({ show, handleClose, setIsStockUpdated, id }) => {
   useEffect(() => {
     const fetchStocks = async () => {
       const response = await axios.get(
-        "http://localhost:8075/stock/AllStocks/" +
+        "https://central-agroz-economic-system.onrender.com/stock/AllStocks/" +
           inputs.CenterName +
           "/" +
           inputs.Date
@@ -99,7 +99,10 @@ const UpdateSellStockModal = ({ show, handleClose, setIsStockUpdated, id }) => {
     const getStocks = async (id) => {
       try {
         const res = await axios
-          .get("http://localhost:8075/stock/stock/" + id)
+          .get(
+            "https://central-agroz-economic-system.onrender.com/stock/stock/" +
+              id
+          )
           .then((res) => {
             const data = res.data;
             setInputs(data);
@@ -142,14 +145,18 @@ const UpdateSellStockModal = ({ show, handleClose, setIsStockUpdated, id }) => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && submitted) {
       axios
-        .put("http://localhost:8075/stock/update/" + id, {
-          SupplierName: inputs.SupplierName,
-          FarmerID: inputs.FarmerID,
-          MobileNo: inputs.MobileNo,
-          Address: inputs.Address,
-          NoOfItems: numItems,
-          Item: inputs.Item,
-        })
+        .put(
+          "https://central-agroz-economic-system.onrender.com/stock/update/" +
+            id,
+          {
+            SupplierName: inputs.SupplierName,
+            FarmerID: inputs.FarmerID,
+            MobileNo: inputs.MobileNo,
+            Address: inputs.Address,
+            NoOfItems: numItems,
+            Item: inputs.Item,
+          }
+        )
         .then((res) => {
           swal("Sold Stock Updated Successfully");
           setIsStockUpdated(true);

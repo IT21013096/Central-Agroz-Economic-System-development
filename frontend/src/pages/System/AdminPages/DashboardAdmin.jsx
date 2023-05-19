@@ -28,7 +28,7 @@ const DashboardAdmin = () => {
 
   const getAllEchoCenters = async () => {
     axios
-      .get("http://localhost:8075/ecocenters/")
+      .get("https://central-agroz-economic-system.onrender.com/ecocenters/")
       .then((res) => {
         const data = res.data;
 

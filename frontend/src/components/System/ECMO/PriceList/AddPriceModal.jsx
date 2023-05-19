@@ -4,13 +4,12 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const AddPriceModal = ({ show, handleClose, setIsPriceUpdated }) => {
+  //get data from local storage as a string
+  const ecoInfo = localStorage.getItem("ecmoInfo");
+  //set data to local storage as a JSON object
+  const ecoInfo1 = JSON.parse(ecoInfo);
 
-      //get data from local storage as a string
-      const ecoInfo = localStorage.getItem("ecmoInfo");
-      //set data to local storage as a JSON object
-      const ecoInfo1 = JSON.parse(ecoInfo);
-    
-      const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
+  const centerName = ecoInfo1["ecoCenter"]["ecoCenterName"] || "Kandy";
   const date = new Date();
   const formattedDate = date
     .toLocaleDateString("en-US", {
@@ -53,13 +52,16 @@ const AddPriceModal = ({ show, handleClose, setIsPriceUpdated }) => {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:8075/priceList/addStockPrice", {
-        CenterName: centerName,
-        Category: inputs.Category,
-        Type: inputs.Type,
-        Image: inputs.Image,
-        Price: inputs.Price,
-      })
+      .post(
+        "https://central-agroz-economic-system.onrender.com/priceList/addStockPrice",
+        {
+          CenterName: centerName,
+          Category: inputs.Category,
+          Type: inputs.Type,
+          Image: inputs.Image,
+          Price: inputs.Price,
+        }
+      )
       .then((res) => {
         swal("Price Added Successfully");
         setIsPriceUpdated(true);

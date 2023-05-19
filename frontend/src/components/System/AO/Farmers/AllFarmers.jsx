@@ -1,22 +1,22 @@
-import React from 'react';
-import DataTable from 'react-data-table-component';
-import { tableCustomStyles } from '../Global/TableStyles/tableStyle.jsx';
-import axios from 'axios';
+import React from "react";
+import DataTable from "react-data-table-component";
+import { tableCustomStyles } from "../Global/TableStyles/tableStyle.jsx";
+import axios from "axios";
 
 const AllFarmers = () => {
-
-  const ao = JSON.parse(localStorage.getItem('agriofficer'));
-  const gramaNiladariDivision = ao['agriculturalOfficer']['gramaNiladariDivision'];
+  const ao = JSON.parse(localStorage.getItem("agriofficer"));
+  const gramaNiladariDivision =
+    ao["agriculturalOfficer"]["gramaNiladariDivision"];
 
   const [farmers, setFarmers] = React.useState([]);
 
   const getAllFarmers = () => {
     axios
-      .get('http://localhost:8075/ao/getfarmers')
+      .get("https://central-agroz-economic-system.onrender.com/ao/getfarmers")
       .then((res) => {
-        const filteredFarmers = res.data.filter((farmer)=>{
+        const filteredFarmers = res.data.filter((farmer) => {
           return farmer.division === gramaNiladariDivision;
-        })
+        });
         setFarmers(filteredFarmers);
       })
       .catch((err) => {
@@ -30,39 +30,39 @@ const AllFarmers = () => {
 
   const columns = [
     {
-      name: 'Farmer',
+      name: "Farmer",
 
       selector: (row) => (
         <img
-          className='cart-product-img'
-          src='https://img.freepik.com/free-icon/farmer_318-640406.jpg?w=2000'
+          className="cart-product-img"
+          src="https://img.freepik.com/free-icon/farmer_318-640406.jpg?w=2000"
           alt={row.fullName}
-          style={{ height: '120px', width: '120px' }}
+          style={{ height: "120px", width: "120px" }}
         />
       ),
     },
     {
-      name: 'Name',
+      name: "Name",
       selector: (row) => row.fullName,
       sortable: true,
     },
     {
-      name: 'Crop Type',
+      name: "Crop Type",
       selector: (row) => row.cropType,
       sortable: true,
     },
     {
-      name: 'Address',
+      name: "Address",
       selector: (row) => row.address,
       sortable: true,
     },
     {
-      name: 'Division',
+      name: "Division",
       selector: (row) => row.division,
       sortable: true,
     },
     {
-      name: 'District',
+      name: "District",
       selector: (row) => row.district,
       sortable: true,
     },
@@ -76,7 +76,7 @@ const AllFarmers = () => {
         pagination={true}
         paginationPerPage={5}
         paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
-        noDataComponent='No Products Found'
+        noDataComponent="No Products Found"
       />
     </div>
   );

@@ -14,7 +14,10 @@ const ViewPriceModal = ({ show, handleClose, id }) => {
   const getData = async () => {
     try {
       const res = await axios
-        .get("http://localhost:8075/priceList/price/" + id)
+        .get(
+          "https://central-agroz-economic-system.onrender.com/priceList/price/" +
+            id
+        )
         .then((res) => {
           const data = res.data;
           setPrice(data);

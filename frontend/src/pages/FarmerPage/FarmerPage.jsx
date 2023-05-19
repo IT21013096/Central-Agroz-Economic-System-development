@@ -33,7 +33,9 @@ const FarmerPage = () => {
 
   const getCrops = async () => {
     await axios
-      .get("http://localhost:8075/farmerL/getallcrops")
+      .get(
+        "https://central-agroz-economic-system.onrender.com/farmerL/getallcrops"
+      )
       .then((res) => {
         setCrops(res.data);
         // console.log(res.data.crops);

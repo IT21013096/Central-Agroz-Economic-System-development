@@ -36,7 +36,9 @@ function StockSellerTable() {
     const getStocks = async () => {
       try {
         const res = await axios
-          .get("http://localhost:8075/stock/AllStocks")
+          .get(
+            "https://central-agroz-economic-system.onrender.com/stock/AllStocks"
+          )
           .then((res) => {
             const data = res.data;
             setStock(data);
@@ -95,7 +97,10 @@ function StockSellerTable() {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/stock/delete/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/stock/delete/" +
+              id
+          )
           .then((res) => {
             setStock((stock) => stock.filter((_, i) => i !== id));
             setIsStockUpdated(true);

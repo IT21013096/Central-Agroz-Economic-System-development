@@ -45,7 +45,9 @@ const PriceTable = () => {
     const getPrices = async () => {
       try {
         const res = await axios
-          .get("http://localhost:8075/priceList/allPrices")
+          .get(
+            "https://central-agroz-economic-system.onrender.com/priceList/allPrices"
+          )
           .then((res) => {
             const data = res.data;
             setPrices(data);
@@ -69,7 +71,10 @@ const PriceTable = () => {
     }).then((willDelete) => {
       if (willDelete) {
         axios
-          .delete("http://localhost:8075/priceList/delete/" + id)
+          .delete(
+            "https://central-agroz-economic-system.onrender.com/priceList/delete/" +
+              id
+          )
           .then((res) => {
             setPrices((prices) => prices.filter((_, i) => i !== id));
             setIsPriceUpdated(true);

@@ -30,7 +30,9 @@ const DashboardECMO = () => {
 
   useEffect(() => {
     const fetchStocks = async () => {
-      const response = await axios.get("http://localhost:8075/stock/AllStocks");
+      const response = await axios.get(
+        "https://central-agroz-economic-system.onrender.com/stock/AllStocks"
+      );
       setStocks(response.data);
     };
 

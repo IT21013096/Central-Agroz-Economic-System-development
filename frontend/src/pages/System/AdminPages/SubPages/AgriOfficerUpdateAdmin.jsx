@@ -80,7 +80,9 @@ const AgriOfficerUpdateAdmin = () => {
   //get agri officer details
   const getAgriOfficerDetails = async () => {
     axios
-      .get(`http://localhost:8075/agriofficers/${id}`)
+      .get(
+        `https://central-agroz-economic-system.onrender.com/agriofficers/${id}`
+      )
       .then((res) => {
         // console.log(res.data);
         setName(res.data.name);
@@ -125,7 +127,10 @@ const AgriOfficerUpdateAdmin = () => {
       };
 
       axios
-        .put(`http://localhost:8075/agriofficers/update`, updatedAgriOfficer)
+        .put(
+          `https://central-agroz-economic-system.onrender.com/agriofficers/update`,
+          updatedAgriOfficer
+        )
         .then(() => {
           swal("Agri Officer Details Updated Successfully", "", "success");
           histroy("/admin/agriofficers");

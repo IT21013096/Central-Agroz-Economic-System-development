@@ -39,7 +39,10 @@ const FarmerUpdateProduct = () => {
 
   const getCropById = async () => {
     axios
-      .get("http://localhost:8075/farmerL/getcropbyid/" + cropId)
+      .get(
+        "https://central-agroz-economic-system.onrender.com/farmerL/getcropbyid/" +
+          cropId
+      )
       .then((res) => {
         // console.log(res.data);
         setCropType(res.data.cropType);
@@ -83,7 +86,10 @@ const FarmerUpdateProduct = () => {
     // console.log(newOb);
 
     axios
-      .put("http://localhost:8075/farmerL/updatecropbyid/", newOb)
+      .put(
+        "https://central-agroz-economic-system.onrender.com/farmerL/updatecropbyid/",
+        newOb
+      )
       .then(
         (res) => {
           // console.log(res.data);
